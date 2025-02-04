@@ -12,6 +12,7 @@ interface PokemonDetailReturn {
 export function usePokemonDetail(url: string): PokemonDetailReturn {
   const { data, error, isValidating, isLoading } = useSWR<Pokemon>(url, fetcher, {
     revalidateOnFocus: false,
+    dedupingInterval: 24 * 60 * 60 * 1000, // 1 day
   })
 
   return {

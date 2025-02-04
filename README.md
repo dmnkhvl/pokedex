@@ -1,5 +1,7 @@
 # Pokédex
 
+[DEMO - hosted on Vercel](https://y-pokedex.vercel.app)
+
 Built with Next.js, TypeScript, and Tailwind CSS to deliver a responsive, modern, and efficient user experience. [PokeAPI](https://pokeapi.co/) was chosen as a data source.
 
 ## Features

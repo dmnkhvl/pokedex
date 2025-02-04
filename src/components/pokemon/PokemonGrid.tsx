@@ -59,24 +59,23 @@ export default function PokemonGrid() {
 
   return (
     <div>
-      {!isLoading && (
-        <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
-      )}
+      <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
 
-      {pokemon.length > 1 ? (
+      {pokemon.length > 0 && !isLoading ? (
         <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {pokemon.map((pokemon) => (
             <PokemonCard url={pokemon.url} key={pokemon.name} />
           ))}
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center w-full ">
-          <Typography variant="h1">Oh no, Trainer!</Typography>
-          <p className="uppercase">
-            {' '}
-            Your search didn't catch any Pokémon. Maybe try another search.
-          </p>
-        </div>
+        !isLoading && (
+          <div className="flex flex-col justify-center items-center w-full">
+            <Typography variant="h1">Oh no, Trainer!</Typography>
+            <p className="uppercase">
+              Your search didn't catch any Pokémon. Maybe try another search.
+            </p>
+          </div>
+        )
       )}
 
       <footer className="flex justify-center my-6">

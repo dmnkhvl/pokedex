@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 
 import '@/styles/globals.css'
+import '@/styles/theme.css'
+
 import { jersey25 } from '@/utils/fonts'
 
 export const metadata: Metadata = {

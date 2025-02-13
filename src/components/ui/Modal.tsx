@@ -25,7 +25,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div
-      className="fixed inset-0 bg-secondary bg-opacity-70 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-secondary/70  flex justify-center items-center z-50"
       onClick={onClose}
     >
       <div

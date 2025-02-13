@@ -1,6 +1,6 @@
-import { ReactNode, useEffect } from 'react'
-import Button from './Button'
-import Typography from './Typography'
+import { useEffect, type ReactNode } from "react"
+import Button from "./Button"
+import Typography from "./Typography"
 
 interface ModalProps {
   isOpen: boolean
@@ -12,12 +12,12 @@ interface ModalProps {
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
-      document.body.classList.add('overflow-hidden')
+      document.body.classList.add("overflow-hidden")
     } else {
-      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove("overflow-hidden")
     }
     return () => {
-      document.body.classList.remove('overflow-hidden')
+      document.body.classList.remove("overflow-hidden")
     }
   }, [isOpen])
 
@@ -25,7 +25,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div
-      className="fixed inset-0 bg-secondary/70  flex justify-center items-center z-50"
+      className="fixed inset-0 bg-secondary/70 flex justify-center items-center z-50"
       onClick={onClose}
     >
       <div

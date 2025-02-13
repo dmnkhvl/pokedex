@@ -1,80 +1,100 @@
-# Pokédex
+# Welcome to React Router!
 
-[DEMO - hosted on Vercel](https://y-pokedex.vercel.app)
+A modern, production-ready template for building full-stack React applications using React Router.
 
-Built with Next.js, TypeScript, and Tailwind CSS to deliver a responsive, modern, and efficient user experience. [PokeAPI](https://pokeapi.co/) was chosen as a data source.
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
 
 ## Features
 
-- <b>Pokémon Cards</b>: Display detailed information on each Pokémon.
-- <b>Load more</b>: Additional loading of Pokémon.
-- <b>Search functionality</b>: Quickly find Pokémon by name.
-- <b>Responsive design</b>: Optimized for devices of all sizes.
-- <b>Modal details</b>: Click on a Pokémon card to view an in-depth list of moves in a modal.
-- <b>Loading states and error handling</b>
-
-## Tech Stack
-
-- [Next.js 14](https://nextjs.org/): Fullstack framework
-- [TypeScript](https://www.typescriptlang.org/): Type safety
-- [Tailwind CSS](https://tailwindcss.com/): Styling
-- [SWR](https://swr.vercel.app/): Data fetching (Enables efficient data fetching with built-in caching, revalidation, and error handling)
-- [class-variance-authority](https://cva.style/docs): Component variants (Simplifies managing component variants, ensuring consistency across the UI.)
-
-## Notes
-
-### Data layer
-
-While building the application, there were several ways to get data, including using Next.js to pre-render pages for better SEO. I chose SWR and I did so for several key reasons.
-
-- A considerably improved user experience
-  SWR offers caching, data revalidation and optimistic UI updates. Users experience exceptionally fast, highly responsive interactions, even with severely poor network conditions.
-- Streamlined processes have improved client-side data management.
-  Using SWR for client-side data fetching improves code maintainability and simplifies reasoning. This method avoids the complexities natural in synchronizing server-rendered data and all client-side state.
-- Flexibility and performance are both extraordinary and optimal.
-
-Although SSR increases SEO the app focused on interactive user experiences. This made the trade-off acceptable. With SWR the application can easily handle real-time data updates and background revalidation
-
-### Styling
-
-I prefer using Tailwind CSS in my project, simply for the developer experience and pretty easy prototyping as well as adapting the app for different screen sizes.
-
-For few component in UI library I chose CVA to handle different variants and sizes, to ensure scalable and maintable components.
-
-## Prerequisites
-
-- Node.js 18.17 or later
-- npm or yarn package manager
+- 🚀 Server-side rendering
+- ⚡️ Hot Module Replacement (HMR)
+- 📦 Asset bundling and optimization
+- 🔄 Data loading and mutations
+- 🔒 TypeScript by default
+- 🎉 TailwindCSS for styling
+- 📖 [React Router docs](https://reactrouter.com/)
 
 ## Getting Started
 
-1. Clone the repository:
+### Installation
 
-```bash
-git clone https://github.com/yourusername/pokedex.git
-cd pokedex
-```
-
-2. Install dependencies:
+Install the dependencies:
 
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Create a `.env.local` file in the root directory and add:
+### Development
 
-```env
-NEXT_PUBLIC_POKEAPI_BASE_URL=https://pokeapi.co/api/v2
-```
-
-4. Run the development server:
+Start the development server with HMR:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Your application will be available at `http://localhost:5173`.
+
+## Building for Production
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+## Deployment
+
+### Docker Deployment
+
+This template includes three Dockerfiles optimized for different package managers:
+
+- `Dockerfile` - for npm
+- `Dockerfile.pnpm` - for pnpm
+- `Dockerfile.bun` - for bun
+
+To build and run using Docker:
+
+```bash
+# For npm
+docker build -t my-app .
+
+# For pnpm
+docker build -f Dockerfile.pnpm -t my-app .
+
+# For bun
+docker build -f Dockerfile.bun -t my-app .
+
+# Run the container
+docker run -p 3000:3000 my-app
+```
+
+The containerized application can be deployed to any platform that supports Docker, including:
+
+- AWS ECS
+- Google Cloud Run
+- Azure Container Apps
+- Digital Ocean App Platform
+- Fly.io
+- Railway
+
+### DIY Deployment
+
+If you're familiar with deploying Node applications, the built-in app server is production-ready.
+
+Make sure to deploy the output of `npm run build`
+
+```
+├── package.json
+├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
+```
+
+## Styling
+
+This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+
+---
+
+Built with ❤️ using React Router.

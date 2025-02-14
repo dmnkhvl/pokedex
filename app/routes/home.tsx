@@ -1,6 +1,10 @@
 import type { NamedAPIResource, Pokemon } from "~/types/pokemon"
 import PokemonGrid from "~/components/pokemon/PokemonGrid"
 import type { Route } from "./+types/home"
+import Banner from "~/components/ui/Banner"
+import { useState } from "react"
+import { getPokemonDetails } from "~/fetchers/pokemon"
+import { POKEMON_FETCH_LIMIT } from "~/utils/constants"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,33 +18,24 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader() {
-  const baseUrl = process.env.NEXT_PUBLIC_POKEAPI_BASE_URL
-  const limit = 20
-
-  try {
-    const response = await fetch(`${baseUrl}pokemon?limit=${limit}`)
-    if (!response.ok) throw new Error("Failed to fetch Pokémon data")
-
-    const data = await response.json()
-    const pokemonList: NamedAPIResource[] = data.results
-
-    const pokemon: Pokemon[] = await Promise.all(
-      pokemonList.map(async (pokemon) => {
-        const res = await fetch(pokemon.url)
-        if (!res.ok) throw new Error("Failed to fetch Pokémon details")
-        return res.json()
-      })
-    )
-
-    return { pokemon }
-  } catch (error) {
-    return { pokemon: [] }
-  }
+  return getPokemonDetails(POKEMON_FETCH_LIMIT)
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
   const { pokemon } = loaderData
-  const pokemonLoaded = pokemon.length > 0
+  const [allPokemon, setAllPokemon] = useState<Pokemon[]>(pokemon)
+  const [offset, setOffset] = useState<number>(20)
 
-  return <section>{pokemonLoaded && <PokemonGrid pokemon={pokemon} />}</section>
+  async function loadMore() {
+    const { pokemon: newPokemon } = await getPokemonDetails(POKEMON_FETCH_LIMIT, offset)
+    setAllPokemon((prev) => [...prev, ...newPokemon])
+    setOffset((prev) => prev + POKEMON_FETCH_LIMIT)
+  }
+
+  return (
+    <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen ">
+      <Banner />
+      {allPokemon.length > 0 && <PokemonGrid pokemon={allPokemon} loadMore={loadMore} />}
+    </section>
+  )
 }

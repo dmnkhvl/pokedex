@@ -3,7 +3,7 @@ import clsx from "clsx"
 import type { ButtonHTMLAttributes } from "react"
 
 const buttonVariants = cva(
-  "uppercase py-1 rounded-sm transition-all duration-200 ease-out min-h-[32px]",
+  "uppercase py-1 rounded-xs transition-all duration-200 ease-out min-h-[32px]",
   {
     variants: {
       size: {

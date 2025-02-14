@@ -26,7 +26,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="max-w-7xl mx-auto">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -37,10 +37,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <main className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
-      <Banner />
+    <>
       <Outlet />
-    </main>
+    </>
   )
 }
 

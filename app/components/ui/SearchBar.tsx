@@ -1,5 +1,5 @@
-import React from 'react'
-import Button from './Button'
+import React from "react"
+import Button from "./Button"
 
 interface SearchBarProps {
   value: string
@@ -12,7 +12,7 @@ export default function SearchBar({
   value,
   onChange,
   onClear,
-  placeholder = 'Search Pokémon...',
+  placeholder = "Search Pokémon...",
 }: SearchBarProps) {
   return (
     <div className="pb-8 lg:pb-12 flex items-center justify-center w-full">

@@ -1,10 +1,13 @@
-import type { NamedAPIResource, Pokemon } from "~/types/pokemon"
+import { useState } from "react"
+import type { Pokemon } from "~/types/pokemon"
 import PokemonGrid from "~/components/pokemon/PokemonGrid"
 import type { Route } from "./+types/home"
 import Banner from "~/components/ui/Banner"
-import { useState } from "react"
-import { getPokemonDetails } from "~/fetchers/pokemon"
+import { getAllPokemon, getPokemonDetails } from "~/fetchers/pokemon"
 import { POKEMON_FETCH_LIMIT } from "~/utils/constants"
+import Typography from "~/components/ui/Typography"
+import SearchBar from "~/components/ui/SearchBar"
+import { usePokemonSearch } from "~/hooks/usePokemonSearch"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,24 +21,50 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader() {
-  return getPokemonDetails(POKEMON_FETCH_LIMIT)
+  const allPokemonList = await getAllPokemon()
+  const initialPokemon = await getPokemonDetails(allPokemonList, 0, POKEMON_FETCH_LIMIT)
+  return {
+    allPokemonList,
+    initialPokemon,
+  }
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { pokemon } = loaderData
-  const [allPokemon, setAllPokemon] = useState<Pokemon[]>(pokemon)
-  const [offset, setOffset] = useState<number>(20)
+  const { allPokemonList, initialPokemon } = loaderData
+  const [loadedPokemon, setLoadedPokemon] = useState<Pokemon[]>(initialPokemon)
+  const [currentOffset, setCurrentOffset] = useState<number>(POKEMON_FETCH_LIMIT)
+
+  const { searchInput, searchResults, isSearching, handleInputChange, clearSearch } =
+    usePokemonSearch(allPokemonList)
 
   async function loadMore() {
-    const { pokemon: newPokemon } = await getPokemonDetails(POKEMON_FETCH_LIMIT, offset)
-    setAllPokemon((prev) => [...prev, ...newPokemon])
-    setOffset((prev) => prev + POKEMON_FETCH_LIMIT)
+    const newPokemon = await getPokemonDetails(allPokemonList, currentOffset, POKEMON_FETCH_LIMIT)
+    setLoadedPokemon((prev) => [...prev, ...newPokemon])
+    setCurrentOffset((prev) => prev + POKEMON_FETCH_LIMIT)
   }
 
+  const displayedPokemon = isSearching ? searchResults : loadedPokemon
+  const noResult = searchInput && displayedPokemon.length === 0
+
   return (
-    <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen ">
+    <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
       <Banner />
-      {allPokemon.length > 0 && <PokemonGrid pokemon={allPokemon} loadMore={loadMore} />}
+      <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
+      {noResult && (
+        <div className="flex flex-col justify-center items-center w-full">
+          <Typography variant="h1">Oh no, Trainer!</Typography>
+          <p className="uppercase">
+            Your search didn't catch any Pokémon. Maybe try another search.
+          </p>
+        </div>
+      )}
+      {displayedPokemon.length > 0 && (
+        <PokemonGrid
+          pokemon={displayedPokemon}
+          loadMore={loadMore}
+          hasMore={!isSearching && currentOffset < allPokemonList.length}
+        />
+      )}
     </section>
   )
 }

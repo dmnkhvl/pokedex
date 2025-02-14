@@ -1,9 +1,9 @@
-import Button from '../ui/Button'
-import Modal from '../ui/Modal'
-import Typography from '../ui/Typography'
-import { PokemonMove } from '@/types/pokemon'
-import { replaceHyphenWithSpace } from '@/utils/formaters'
-import { useState } from 'react'
+import type { PokemonMove } from "~/types/pokemon"
+import Button from "../ui/Button"
+import Modal from "../ui/Modal"
+import Typography from "../ui/Typography"
+import { useState } from "react"
+import { replaceHyphenWithSpace } from "~/utils/formaters"
 
 interface PokemonMovesProps {
   moves: PokemonMove[]

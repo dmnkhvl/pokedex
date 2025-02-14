@@ -1,28 +1,16 @@
-import { Pokemon } from '@/types/pokemon'
-import { replaceHyphenWithSpace } from '@/utils/formaters'
-import PokemonCardHeader from './PokemonCardHeader'
-import PokemonMoves from './PokemonMoves'
-import PokemonStat from './PokemonStat'
-import useSWR from 'swr'
-import { fetcher } from '@/utils/fetchers'
-import PokemonCardSkeleton from './PokemonCardSkeleton'
-import { usePokemonDetail } from '@/hooks/usePokemonDetail'
+import PokemonCardHeader from "./PokemonCardHeader"
+import PokemonMoves from "./PokemonMoves"
+import PokemonStat from "./PokemonStat"
+import { replaceHyphenWithSpace } from "~/utils/formaters"
+import type { Pokemon } from "~/types/pokemon"
 
 interface PokemonCardProps {
-  url: string
+  pokemon: Pokemon
 }
 
-export default function PokemonCard({ url }: PokemonCardProps) {
-  const { pokemon, error, isLoading } = usePokemonDetail(url)
-
-  if (isLoading) return <PokemonCardSkeleton />
-
-  if (error || !pokemon) {
-    return <PokemonCardSkeleton>Error loading Pokémon details.</PokemonCardSkeleton>
-  }
-
+export default function PokemonCard({ pokemon }: PokemonCardProps) {
   return (
-    <div className="w-full mx-auto flex flex-col gap-y-6 animate-fadeInUp">
+    <div className="w-full mx-auto flex flex-col gap-y-6 animate-fade-in-up">
       <PokemonCardHeader pokemon={pokemon} />
 
       <main className="bg-primary overflow-hidden rounded-xl border-b-card border-secondary px-5 py-6 outline outline-default outline-secondary">

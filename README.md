@@ -1,6 +1,6 @@
 # Pokédex
 
-[DEMO - hosted on Vercel](https://y-pokedex.vercel.app)
+[DEMO - hosted on Vercel](https://pokedex-smoky-beta.vercel.app)
 
 Built with Next.js, TypeScript, and Tailwind CSS to deliver a responsive, modern, and efficient user experience. [PokeAPI](https://pokeapi.co/) was chosen as a data source.
 
@@ -15,66 +15,49 @@ Built with Next.js, TypeScript, and Tailwind CSS to deliver a responsive, modern
 
 ## Tech Stack
 
-- [Next.js 14](https://nextjs.org/): Fullstack framework
+- [React Router v7](https://reactrouter.com/) - As a fullstack framework
 - [TypeScript](https://www.typescriptlang.org/): Type safety
-- [Tailwind CSS](https://tailwindcss.com/): Styling
-- [SWR](https://swr.vercel.app/): Data fetching (Enables efficient data fetching with built-in caching, revalidation, and error handling)
+- [Tailwind CSS v4](https://tailwindcss.com/) - Styling
+- [React Router Loaders](https://reactrouter.com/en/main/guides/data-loading) - Data fetching
 - [class-variance-authority](https://cva.style/docs): Component variants (Simplifies managing component variants, ensuring consistency across the UI.)
 
-## Notes
+## Data layer
 
-### Data layer
+### **React Router Loaders**
 
-While building the application, there were several ways to get data, including using Next.js to pre-render pages for better SEO. I chose SWR and I did so for several key reasons.
+The app uses React Router loaders to fetch Pokémon data before the page loads, ensuring an optimal user experience. This avoids unnecessary client-side fetches and improves performance.
 
-- A considerably improved user experience
-  SWR offers caching, data revalidation and optimistic UI updates. Users experience exceptionally fast, highly responsive interactions, even with severely poor network conditions.
-- Streamlined processes have improved client-side data management.
-  Using SWR for client-side data fetching improves code maintainability and simplifies reasoning. This method avoids the complexities natural in synchronizing server-rendered data and all client-side state.
-- Flexibility and performance are both extraordinary and optimal.
+### **Client-side Fetching**
 
-Although SSR increases SEO the app focused on interactive user experiences. This made the trade-off acceptable. With SWR the application can easily handle real-time data updates and background revalidation
+- **Load More Pokémon**: Fetches additional Pokémon details dynamically.
+- **Search Functionality**: Uses a prefetched list and a debounced input to quickly find Pokémon by name.
 
-### Styling
+It results in:
 
-I prefer using Tailwind CSS in my project, simply for the developer experience and pretty easy prototyping as well as adapting the app for different screen sizes.
+- ⚡ **Fast initial load** via pre-fetched data.
+- 🔍 **Instant search results** with optimized client-side fetching.
+- 🔄 **Efficient updates** using React Router loaders.
+
+## Styles
+
+I chose Tailwind CSS for its excellent developer experience, ease of prototyping, and seamless adaptability across different screen sizes.
 
 For few component in UI library I chose CVA to handle different variants and sizes, to ensure scalable and maintable components.
 
-## Prerequisites
+## To run locally
 
-- Node.js 18.17 or later
-- npm or yarn package manager
-
-## Getting Started
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/yourusername/pokedex.git
-cd pokedex
-```
-
-2. Install dependencies:
+Install the dependencies:
 
 ```bash
 npm install
-# or
-yarn install
 ```
 
-3. Create a `.env.local` file in the root directory and add:
+### Development
 
-```env
-NEXT_PUBLIC_POKEAPI_BASE_URL=https://pokeapi.co/api/v2
-```
-
-4. Run the development server:
+Start the development server with HMR:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Your application will be available at `http://localhost:5173`.

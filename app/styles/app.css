@@ -1,3 +1,11 @@
+@import "./theme.css";
+
+html,
+body {
+  @apply bg-primary text-secondary;
+  font-family: "Jersey 25", sans-serif;
+}
+
 /* Hide scrollbar for Webkit browsers */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

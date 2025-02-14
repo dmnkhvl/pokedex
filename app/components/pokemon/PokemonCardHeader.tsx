@@ -1,7 +1,6 @@
-import Image from 'next/image'
-import Typography from '../ui/Typography'
-import { Pokemon } from '@/types/pokemon'
-import { replaceHyphenWithSpace, formatPokemonId } from '@/utils/formaters'
+import Typography from "../ui/Typography"
+import { formatPokemonId, replaceHyphenWithSpace } from "~/utils/formaters"
+import type { Pokemon } from "~/types/pokemon"
 
 interface PokemonCardHeaderProps {
   pokemon: Pokemon
@@ -14,13 +13,7 @@ export default function PokemonCardHeader({ pokemon }: PokemonCardHeaderProps) {
         <p className="text-left text-primary">{formatPokemonId(pokemon.id)}</p>
       </div>
       {pokemon.sprites.front_default && (
-        <Image
-          src={pokemon.sprites.front_default}
-          alt={pokemon.name}
-          width={160}
-          height={160}
-          priority
-        />
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} width={160} height={160} />
       )}
       <Typography variant="h1" className="w-full bg-secondary px-4 text-center text-primary">
         {replaceHyphenWithSpace(pokemon.name)}

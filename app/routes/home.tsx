@@ -9,6 +9,8 @@ import Typography from "~/components/ui/Typography"
 import SearchBar from "~/components/ui/SearchBar"
 import { usePokemonSearch } from "~/hooks/usePokemonSearch"
 import Error from "~/components/ui/Error"
+import LoadingSpinner from "~/components/ui/LoadingSpinner"
+import Button from "~/components/ui/Button"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,17 +43,19 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [loadedPokemon, setLoadedPokemon] = useState<Pokemon[]>(initialPokemon)
   const [currentOffset, setCurrentOffset] = useState<number>(POKEMON_FETCH_LIMIT)
   const [newPokemonError, setNewPokemonError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   const { searchInput, searchResults, isSearching, handleInputChange, clearSearch } =
     usePokemonSearch(allPokemonList)
 
   async function loadMore() {
+    setIsLoading(true)
     const { data: newPokemon, error } = await getPokemonDetails(
       allPokemonList,
       currentOffset,
       POKEMON_FETCH_LIMIT
     )
-
+    setIsLoading(false)
     if (error) {
       setNewPokemonError(error)
       return
@@ -85,12 +89,18 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </p>
         </div>
       )}
+
       {displayedPokemon.length > 0 && (
-        <PokemonGrid
-          pokemon={displayedPokemon}
-          loadMore={loadMore}
-          hasMore={!isSearching && currentOffset < allPokemonList.length}
-        />
+        <>
+          <PokemonGrid pokemon={displayedPokemon} />
+          <footer className="flex justify-center">
+            {!isSearching && currentOffset < allPokemonList.length && (
+              <Button type="button" onClick={loadMore} disabled={isLoading}>
+                {isLoading ? <LoadingSpinner /> : "Load more"}
+              </Button>
+            )}
+          </footer>
+        </>
       )}
     </section>
   )

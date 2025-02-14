@@ -39,7 +39,11 @@ export function usePokemonSearch(allPokemonList: NamedAPIResource[]) {
         pokemon.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
       )
 
-      const results = await getPokemonDetails(filteredPokemonList, 0, filteredPokemonList.length)
+      const { data: results } = await getPokemonDetails(
+        filteredPokemonList,
+        0,
+        filteredPokemonList.length
+      )
 
       setSearchResults(results)
       setIsSearching(true)

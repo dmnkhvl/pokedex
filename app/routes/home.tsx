@@ -8,6 +8,7 @@ import { POKEMON_FETCH_LIMIT } from "~/utils/constants"
 import Typography from "~/components/ui/Typography"
 import SearchBar from "~/components/ui/SearchBar"
 import { usePokemonSearch } from "~/hooks/usePokemonSearch"
+import Error from "~/components/ui/Error"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,24 +22,40 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader() {
-  const allPokemonList = await getAllPokemon()
-  const initialPokemon = await getPokemonDetails(allPokemonList, 0, POKEMON_FETCH_LIMIT)
+  const { data: allPokemonList, error: allPokemonListError } = await getAllPokemon()
+  const { data: initialPokemon, error: pokemonDetailsError } = await getPokemonDetails(
+    allPokemonList,
+    0,
+    POKEMON_FETCH_LIMIT
+  )
   return {
     allPokemonList,
     initialPokemon,
+    allPokemonListError,
+    pokemonDetailsError,
   }
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { allPokemonList, initialPokemon } = loaderData
+  const { allPokemonList, initialPokemon, allPokemonListError, pokemonDetailsError } = loaderData
   const [loadedPokemon, setLoadedPokemon] = useState<Pokemon[]>(initialPokemon)
   const [currentOffset, setCurrentOffset] = useState<number>(POKEMON_FETCH_LIMIT)
+  const [newPokemonError, setNewPokemonError] = useState<string | null>(null)
 
   const { searchInput, searchResults, isSearching, handleInputChange, clearSearch } =
     usePokemonSearch(allPokemonList)
 
   async function loadMore() {
-    const newPokemon = await getPokemonDetails(allPokemonList, currentOffset, POKEMON_FETCH_LIMIT)
+    const { data: newPokemon, error } = await getPokemonDetails(
+      allPokemonList,
+      currentOffset,
+      POKEMON_FETCH_LIMIT
+    )
+
+    if (error) {
+      setNewPokemonError(error)
+      return
+    }
     setLoadedPokemon((prev) => [...prev, ...newPokemon])
     setCurrentOffset((prev) => prev + POKEMON_FETCH_LIMIT)
   }
@@ -46,6 +63,16 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const displayedPokemon = isSearching ? searchResults : loadedPokemon
   const noResult = searchInput && displayedPokemon.length === 0
 
+  if (allPokemonListError || pokemonDetailsError || newPokemonError) {
+    return (
+      <Error
+        message={
+          (allPokemonListError || pokemonDetailsError || newPokemonError) ??
+          "An unknown error occurred"
+        }
+      />
+    )
+  }
   return (
     <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
       <Banner />

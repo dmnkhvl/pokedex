@@ -45,8 +45,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [newPokemonError, setNewPokemonError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const { searchInput, searchResults, isSearching, handleInputChange, clearSearch } =
-    usePokemonSearch(allPokemonList)
+  const {
+    searchInput,
+    searchResults,
+    isSearching,
+    isLoading: isSearchLoading,
+    handleInputChange,
+    clearSearch,
+  } = usePokemonSearch(allPokemonList)
 
   async function loadMore() {
     setIsLoading(true)
@@ -71,17 +77,27 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     return (
       <Error
         message={
-          (allPokemonListError || pokemonDetailsError || newPokemonError) ??
+          allPokemonListError ||
+          pokemonDetailsError ||
+          newPokemonError ||
           "An unknown error occurred"
         }
       />
     )
   }
+
   return (
     <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
       <Banner />
+
       <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
-      {noResult && (
+      {isSearchLoading && (
+        <div className="flex flex-col gap-y-2 justify-center items-center w-full">
+          <div className="w-6 h-6 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
+
+      {noResult && !isSearchLoading && (
         <div className="flex flex-col justify-center items-center w-full">
           <Typography variant="h1">Oh no, Trainer!</Typography>
           <p className="uppercase">
@@ -90,7 +106,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         </div>
       )}
 
-      {displayedPokemon.length > 0 && (
+      {displayedPokemon.length > 0 && !isSearchLoading && (
         <>
           <PokemonGrid pokemon={displayedPokemon} />
           <footer className="flex justify-center">

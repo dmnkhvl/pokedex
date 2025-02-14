@@ -8,6 +8,7 @@ export function usePokemonSearch(allPokemonList: NamedAPIResource[]) {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("")
   const [searchResults, setSearchResults] = useState<Pokemon[]>([])
   const [isSearching, setIsSearching] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const debouncedSetSearchTerm = useCallback(
     debounce((value: string) => {
@@ -20,20 +21,28 @@ export function usePokemonSearch(allPokemonList: NamedAPIResource[]) {
     const value = e.target.value
     setSearchInput(value)
     debouncedSetSearchTerm(value)
+
+    setIsSearching(value.length > 0)
+    setIsLoading(true)
   }
 
   const clearSearch = () => {
     setSearchInput("")
     setDebouncedSearchTerm("")
+    setSearchResults([])
     setIsSearching(false)
+    setIsLoading(false)
   }
 
   useEffect(() => {
     async function performSearch() {
       if (!debouncedSearchTerm) {
-        setIsSearching(false)
+        setSearchResults([])
+        setIsLoading(false)
         return
       }
+
+      setIsLoading(true)
 
       const filteredPokemonList = allPokemonList.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
@@ -46,7 +55,7 @@ export function usePokemonSearch(allPokemonList: NamedAPIResource[]) {
       )
 
       setSearchResults(results)
-      setIsSearching(true)
+      setIsLoading(false)
     }
 
     performSearch()
@@ -56,6 +65,7 @@ export function usePokemonSearch(allPokemonList: NamedAPIResource[]) {
     searchInput,
     searchResults,
     isSearching,
+    isLoading,
     handleInputChange,
     clearSearch,
   }

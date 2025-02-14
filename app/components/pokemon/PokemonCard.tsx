@@ -1,7 +1,6 @@
 import PokemonCardHeader from "./PokemonCardHeader"
 import PokemonMoves from "./PokemonMoves"
 import PokemonStat from "./PokemonStat"
-import PokemonCardSkeleton from "./PokemonCardSkeleton"
 import { replaceHyphenWithSpace } from "~/utils/formaters"
 import type { Pokemon } from "~/types/pokemon"
 
@@ -10,15 +9,8 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
-  const isLoading = false
-  if (isLoading) return <PokemonCardSkeleton />
-
-  // if (error || !pokemon) {
-  //   return <PokemonCardSkeleton>Error loading Pokémon details.</PokemonCardSkeleton>
-  // }
-
   return (
-    <div className="w-full mx-auto flex flex-col gap-y-6 animate-fadeInUp">
+    <div className="w-full mx-auto flex flex-col gap-y-6">
       <PokemonCardHeader pokemon={pokemon} />
 
       <main className="bg-primary overflow-hidden rounded-xl border-b-card border-secondary px-5 py-6 outline outline-default outline-secondary">

@@ -1,7 +1,6 @@
-import { type LoaderFunction } from "react-router"
-import type { Route } from "../+types/root"
 import type { NamedAPIResource, Pokemon } from "~/types/pokemon"
 import PokemonGrid from "~/components/pokemon/PokemonGrid"
+import type { Route } from "./+types/home"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,7 +13,7 @@ export function meta({}: Route.MetaArgs) {
   ]
 }
 
-export const loader: LoaderFunction = async () => {
+export async function loader() {
   const baseUrl = process.env.NEXT_PUBLIC_POKEAPI_BASE_URL
   const limit = 20
 
@@ -33,24 +32,15 @@ export const loader: LoaderFunction = async () => {
       })
     )
 
-    return {
-      pokemon,
-    }
+    return { pokemon }
   } catch (error) {
     return { pokemon: [] }
   }
 }
 
-interface HomeProps {
-  loaderData: { pokemon: Pokemon[] }
-}
-
-export default function Home({ loaderData }: HomeProps) {
+export default function Home({ loaderData }: Route.ComponentProps) {
   const { pokemon } = loaderData
+  const pokemonLoaded = pokemon.length > 0
 
-  return (
-    <main className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
-      {pokemon.length > 0 && <PokemonGrid pokemon={pokemon} />}
-    </main>
-  )
+  return <section>{pokemonLoaded && <PokemonGrid pokemon={pokemon} />}</section>
 }

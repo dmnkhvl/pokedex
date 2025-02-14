@@ -112,7 +112,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           <footer className="flex justify-center">
             {!isSearching && currentOffset < allPokemonList.length && (
               <Button type="button" onClick={loadMore} disabled={isLoading}>
-                {isLoading ? <LoadingSpinner /> : "Load more"}
+                {isLoading ? <LoadingSpinner size="sm" color="onDark" /> : "Load more"}
               </Button>
             )}
           </footer>

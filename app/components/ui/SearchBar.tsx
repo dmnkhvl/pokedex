@@ -15,7 +15,7 @@ export default function SearchBar({
   placeholder = "Search Pokémon...",
 }: SearchBarProps) {
   return (
-    <div className="pb-8 lg:pb-12 flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full">
       <div className="relative w-full sm:w-[440px] mx-auto">
         <input
           type="text"

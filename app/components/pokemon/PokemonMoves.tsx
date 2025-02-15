@@ -23,11 +23,11 @@ export default function PokemonMoves({ moves, pokemonName }: PokemonMovesProps) 
     <div className="flex flex-col gap-y-2">
       <Typography variant="h2">MOVES</Typography>
       <ul>
-        {moves.slice(0, 9).map((move) => (
+        {moves.slice(0, 8).map((move) => (
           <PokemonMoveItem key={move.move.name} move={move} />
         ))}
       </ul>
-      {moves.length > 9 && (
+      {moves.length > 8 && (
         <Button size="sm" variant="secondary" onClick={() => setIsModalOpen(true)}>
           Show More
         </Button>

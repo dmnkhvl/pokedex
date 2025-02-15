@@ -25,11 +25,11 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div
-      className="fixed inset-0 bg-secondary/70 flex justify-center items-center z-50"
+      className="fixed inset-0 bg-secondary/90 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={onClose}
     >
       <div
-        className="bg-primary px-4 py-2 rounded-xl w-full max-w-80 flex flex-col gap-y-2 border-default border-b-card border-secondary"
+        className="bg-primary px-4 py-2 rounded-xl w-full max-w-80 flex flex-col gap-y-2  border-b-10 border-t-4 border-l-4 border-r-4 border-secondary outline-2 outline-primary"
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
@@ -39,7 +39,7 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
         )}
         <main className="max-h-80 overflow-y-auto hide-scrollbar">{children}</main>
         <footer>
-          <Button size="sm" onClick={onClose}>
+          <Button size="sm" variant="secondary" onClick={onClose}>
             Close
           </Button>
         </footer>

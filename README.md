@@ -5,7 +5,9 @@
 Built with built using **React Router v7**, **TypeScript**, and **Tailwind CSS v4**. to deliver a responsive, modern, and efficient user experience. 
 [PokeAPI](https://pokeapi.co/) was chosen as a data source.
 
-<img width="920" alt="image" src="https://github.com/user-attachments/assets/1b2805a2-e7f2-46de-955b-20ebdc1a1f15" />
+<img width="920" alt="image" src="https://github.com/user-attachments/assets/23cf9336-7c9c-4856-b22f-e4bb35868aa2" />
+
+
 
 ## Features
 

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-display: "Jersey 25", "sans-serif";
   --animate-fade-in-up: fadeInUp 0.4s ease-out;
   --outline-width-default: 3px;
   --border-width-default: 3px;

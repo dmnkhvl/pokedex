@@ -3,7 +3,7 @@ import type { Pokemon } from "~/types/pokemon"
 import PokemonGrid from "~/components/pokemon/PokemonGrid"
 import type { Route } from "./+types/home"
 import Banner from "~/components/ui/Banner"
-import { getAllPokemon, getPokemonDetails } from "~/fetchers/pokemon"
+
 import { POKEMON_FETCH_LIMIT } from "~/utils/constants"
 import Typography from "~/components/ui/Typography"
 import SearchBar from "~/components/ui/SearchBar"
@@ -11,6 +11,8 @@ import { usePokemonSearch } from "~/hooks/usePokemonSearch"
 import Error from "~/components/ui/Error"
 import LoadingSpinner from "~/components/ui/LoadingSpinner"
 import Button from "~/components/ui/Button"
+import { getAllPokemon } from "~/fetchers/pokemon.server"
+import { getPokemonDetails } from "~/fetchers/pokemon"
 
 export function meta({}: Route.MetaArgs) {
   return [

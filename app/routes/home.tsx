@@ -102,7 +102,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       {noResult && !isSearchLoading && (
         <div className="flex flex-col justify-center items-center w-full">
           <Typography variant="h1">Oh no, Trainer!</Typography>
-          <p className="uppercase">
+          <p className="uppercase text-center">
             Your search didn't catch any Pokémon. Maybe try another search.
           </p>
         </div>

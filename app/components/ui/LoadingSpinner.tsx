@@ -5,7 +5,7 @@ const spinnerVariants = cva("rounded-full animate-spin", {
   variants: {
     size: {
       default: "w-6 h-6 border-4",
-      sm: "w-4 h-4 border-4",
+      sm: "w-4 h-4 border-default",
     },
     color: {
       default: "border-secondary border-t-transparent",

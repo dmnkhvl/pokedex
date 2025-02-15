@@ -95,11 +95,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       </h1>
       <main className="flex flex-col gap-y-8">
         <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
-        {isSearchLoading && (
-          <div className="flex flex-col gap-y-2 justify-center items-center w-full">
-            <div className="w-6 h-6 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
-          </div>
-        )}
+        {isSearchLoading && <LoadingSpinner color="onDark" />}
 
         {noResult && !isSearchLoading && (
           <div className="flex flex-col justify-center items-center w-full">
@@ -116,7 +112,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             <footer className="flex justify-center">
               {!isSearching && currentOffset < allPokemonList.length && (
                 <Button type="button" onClick={loadMore} disabled={isLoading}>
-                  {isLoading ? <LoadingSpinner size="sm" color="onDark" /> : "Load more"}
+                  {isLoading ? <LoadingSpinner size="sm" /> : "Load more"}
                 </Button>
               )}
             </footer>

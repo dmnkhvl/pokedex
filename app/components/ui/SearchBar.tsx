@@ -15,14 +15,14 @@ export default function SearchBar({
   placeholder = "Search Pokémon...",
 }: SearchBarProps) {
   return (
-    <div className="flex items-center w-full bg-secondary p-6 rounded-full">
+    <div className="flex items-center w-full bg-secondary p-8 rounded-full">
       <div className="relative w-full sm:w-[440px]">
         <input
           type="text"
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="transition-all duration-200 ease-out outline-4 outline-offset-4 outline-primary bg-primary text-secondary py-2 rounded-full px-6 placeholder:text-secondary w-full text-lg focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary focus:placeholder:text-secondary/70"
+          className="transition-all duration-200 ease-out outline-2 outline-offset-4 outline-primary bg-primary text-secondary rounded-full px-6 placeholder:text-secondary w-full text-lg  focus:placeholder:text-secondary/70 focus:outline-none  h-12"
         />
         {value && (
           <button

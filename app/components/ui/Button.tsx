@@ -3,15 +3,20 @@ import clsx from "clsx"
 import type { ButtonHTMLAttributes } from "react"
 
 const buttonVariants = cva(
-  "uppercase font-bold rounded-lg transition-all duration-200 ease-out h-10",
+  "uppercase font-bold rounded-md transition-all duration-200 ease-out h-10",
   {
     variants: {
       size: {
-        default: "w-[120px]",
+        default: "w-[120px] text-lg",
         sm: "w-[92px] text-sm",
       },
       variant: {
-        primary: ["bg-secondary", "text-primary", "hover:opacity-90"],
+        primary: [
+          "bg-primary",
+          "text-secondary",
+          "hover:opacity-90",
+          "outline-2 outline-offset-4 outline-primary",
+        ],
         secondary: [
           "bg-transparent",
           "text-secondary",

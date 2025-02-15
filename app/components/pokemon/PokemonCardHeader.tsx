@@ -9,8 +9,8 @@ interface PokemonCardHeaderProps {
 export default function PokemonCardHeader({ pokemon }: PokemonCardHeaderProps) {
   return (
     <header className="bg-primary flex flex-col items-center justify-center overflow-hidden rounded-xl border-secondary outline-offset-4 outline-primary outline-2">
-      <div className="self-start rounded-br-xl bg-secondary px-4">
-        <p className="text-left text-primary">{formatPokemonId(pokemon.id)}</p>
+      <div className="self-start rounded-br-2xl  bg-secondary px-4 h-8 flex justify-center items-center">
+        <p className="text-left text-primary  leading-none">{formatPokemonId(pokemon.id)}</p>
       </div>
       {pokemon.sprites.front_default && (
         <img src={pokemon.sprites.front_default} alt={pokemon.name} width={160} height={160} />

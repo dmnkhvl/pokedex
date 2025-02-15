@@ -89,7 +89,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   }
 
   return (
-    <section className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full flex flex-col gap-y-8  px-10 sm:px-4 py-8 min-h-screen">
+    <section className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full flex flex-col gap-y-6 sm:px-4 py-8 min-h-screen ">
       <h1 className="text-6xl md:text-8xl  uppercase">Pokédex</h1>
       <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
       {isSearchLoading && (

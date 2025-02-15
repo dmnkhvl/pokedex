@@ -89,36 +89,40 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   }
 
   return (
-    <section className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full flex flex-col gap-y-4 sm:gap-y-6 px-4 sm:px-4 py-8 min-h-screen ">
-      <h1 className="text-6xl md:text-8xl uppercase text-primary text-center">Pokédex</h1>
-      <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
-      {isSearchLoading && (
-        <div className="flex flex-col gap-y-2 justify-center items-center w-full">
-          <div className="w-6 h-6 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
+    <div className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full flex flex-col gap-y-4 sm:gap-y-6 px-8 sm:px-4 py-8 min-h-screen">
+      <h1 className="text-6xl md:text-8xl uppercase text-primary text-center leading-none">
+        Pokédex
+      </h1>
+      <main className="flex flex-col gap-y-8">
+        <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
+        {isSearchLoading && (
+          <div className="flex flex-col gap-y-2 justify-center items-center w-full">
+            <div className="w-6 h-6 border-4 border-secondary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        )}
 
-      {noResult && !isSearchLoading && (
-        <div className="flex flex-col justify-center items-center w-full">
-          <Typography variant="h1">Oh no, Trainer!</Typography>
-          <p className="uppercase text-center">
-            Your search didn't catch any Pokémon. Maybe try another search.
-          </p>
-        </div>
-      )}
+        {noResult && !isSearchLoading && (
+          <div className="flex flex-col justify-center items-center w-full">
+            <Typography variant="h1">Oh no, Trainer!</Typography>
+            <p className="uppercase text-center">
+              Your search didn't catch any Pokémon. Maybe try another search.
+            </p>
+          </div>
+        )}
 
-      {displayedPokemon.length > 0 && !isSearchLoading && (
-        <>
-          <PokemonGrid pokemon={displayedPokemon} />
-          <footer className="flex justify-center">
-            {!isSearching && currentOffset < allPokemonList.length && (
-              <Button type="button" onClick={loadMore} disabled={isLoading}>
-                {isLoading ? <LoadingSpinner size="sm" color="onDark" /> : "Load more"}
-              </Button>
-            )}
-          </footer>
-        </>
-      )}
-    </section>
+        {displayedPokemon.length > 0 && !isSearchLoading && (
+          <>
+            <PokemonGrid pokemon={displayedPokemon} />
+            <footer className="flex justify-center">
+              {!isSearching && currentOffset < allPokemonList.length && (
+                <Button type="button" onClick={loadMore} disabled={isLoading}>
+                  {isLoading ? <LoadingSpinner size="sm" color="onDark" /> : "Load more"}
+                </Button>
+              )}
+            </footer>
+          </>
+        )}
+      </main>
+    </div>
   )
 }

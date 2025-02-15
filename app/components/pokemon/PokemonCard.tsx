@@ -10,7 +10,7 @@ interface PokemonCardProps {
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
   return (
-    <div className="w-full mx-auto flex flex-col gap-y-6 animate-fade-in-up">
+    <div className="w-full mx-auto flex flex-col gap-y-8 animate-fade-in-up">
       <PokemonCardHeader pokemon={pokemon} />
 
       <main className="bg-primary overflow-hidden rounded-xl border-b-card border-secondary px-5 py-6 outline-4 outline-offset-4 outline-primary">

@@ -93,7 +93,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       <h1 className="text-6xl md:text-8xl uppercase text-primary text-center leading-none">
         Pokédex
       </h1>
-      <main className="flex flex-col gap-y-8">
+      <main className="flex flex-col gap-y-8 sm:gap-y-16">
         <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
         {isSearchLoading && <LoadingSpinner color="onDark" />}
 
@@ -109,15 +109,20 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         {displayedPokemon.length > 0 && !isSearchLoading && (
           <>
             <PokemonGrid pokemon={displayedPokemon} />
-            <footer className="flex justify-center">
+            <div className="flex justify-center">
               {!isSearching && currentOffset < allPokemonList.length && (
                 <Button type="button" onClick={loadMore} disabled={isLoading}>
                   {isLoading ? <LoadingSpinner size="sm" /> : "Load more"}
                 </Button>
               )}
-            </footer>
+            </div>
           </>
         )}
+        <footer>
+          <Typography variant="body2" className="text-center">
+            Strong Pokémon. Weak Pokémon. That is only the selfish perception of people
+          </Typography>
+        </footer>
       </main>
     </div>
   )

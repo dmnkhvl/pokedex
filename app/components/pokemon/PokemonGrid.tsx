@@ -10,7 +10,7 @@ interface PokemonGridProps {
 export default function PokemonGrid({ pokemon }: PokemonGridProps) {
   return (
     <div>
-      <div className="grid w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {pokemon?.map((pokemon) => (
           <PokemonCard pokemon={pokemon} key={pokemon.name} />
         ))}

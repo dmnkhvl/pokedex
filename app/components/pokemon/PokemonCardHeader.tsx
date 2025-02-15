@@ -8,7 +8,7 @@ interface PokemonCardHeaderProps {
 
 export default function PokemonCardHeader({ pokemon }: PokemonCardHeaderProps) {
   return (
-    <header className="bg-primary flex flex-col items-center justify-center overflow-hidden rounded-xl border-secondary outline outline-default outline-secondary">
+    <header className="bg-primary flex flex-col items-center justify-center overflow-hidden rounded-xl border-secondary outline-4 outline-secondary">
       <div className="self-start rounded-br-xl bg-secondary px-4">
         <p className="text-left text-primary">{formatPokemonId(pokemon.id)}</p>
       </div>

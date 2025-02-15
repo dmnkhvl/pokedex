@@ -18,8 +18,8 @@ const buttonVariants = cva("uppercase  rounded-xs transition-all duration-200 ea
       secondary: [
         "bg-transparent",
         "text-secondary",
-        "border-default border-secondary",
-        "hover:border-b-card",
+        "border-default border-secondary border-b-card",
+        "hover:border-b-default",
       ],
     },
   },

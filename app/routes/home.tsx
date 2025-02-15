@@ -89,9 +89,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   }
 
   return (
-    <section className="container mx-auto flex flex-col gap-y-8 lg:gap-y-12 px-10 sm:px-4 py-8 min-h-screen">
-      <Banner />
-
+    <section className="container mx-auto flex flex-col gap-y-8  px-10 sm:px-4 py-8 min-h-screen">
+      <h1 className="text-8xl uppercase">Pokédex</h1>
       <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
       {isSearchLoading && (
         <div className="flex flex-col gap-y-2 justify-center items-center w-full">

@@ -2,7 +2,7 @@
 
 html,
 body {
-  @apply bg-secondary text-secondary font-display;
+  @apply bg-secondary text-primary font-display;
 }
 
 /* Hide scrollbar for Webkit browsers */

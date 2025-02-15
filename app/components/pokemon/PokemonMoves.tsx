@@ -12,7 +12,9 @@ interface PokemonMovesProps {
 
 const PokemonMoveItem = ({ move }: { move: PokemonMove }) => (
   <li>
-    <p className="uppercase text-lg">{replaceHyphenWithSpace(move.move.name)}</p>
+    <Typography variant="body1" onDark={false}>
+      {replaceHyphenWithSpace(move.move.name)}
+    </Typography>
   </li>
 )
 
@@ -21,7 +23,9 @@ export default function PokemonMoves({ moves, pokemonName }: PokemonMovesProps) 
 
   return (
     <div className="flex flex-col gap-y-2">
-      <Typography variant="h2">MOVES</Typography>
+      <Typography variant="h2" onDark={false}>
+        MOVES
+      </Typography>
       <ul>
         {moves.slice(0, 8).map((move) => (
           <PokemonMoveItem key={move.move.name} move={move} />

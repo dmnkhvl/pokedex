@@ -34,7 +34,9 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
       >
         {title && (
           <header>
-            <Typography variant="h1">{title}</Typography>
+            <Typography variant="h1" onDark={false}>
+              {title}
+            </Typography>
           </header>
         )}
         <main className="max-h-80 overflow-y-auto hide-scrollbar">{children}</main>

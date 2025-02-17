@@ -88,6 +88,8 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     )
   }
 
+  const showNoResult = noResult && !isSearchLoading
+
   return (
     <div className="mx-auto sm:max-w-[640px] md:w-full lg:max-w-4xl xl:max-w-full flex flex-col gap-y-4 sm:gap-y-6 px-8 sm:px-4 py-8 min-h-screen">
       <h1 className="text-6xl md:text-8xl uppercase text-primary text-center leading-none">
@@ -97,7 +99,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <SearchBar value={searchInput} onChange={handleInputChange} onClear={clearSearch} />
         {isSearchLoading && <LoadingSpinner color="onDark" />}
 
-        {noResult && !isSearchLoading && (
+        {showNoResult && (
           <div className="flex flex-col justify-center items-center w-full">
             <Typography variant="h1">Oh no, Trainer!</Typography>
             <p className="uppercase text-center">
@@ -118,11 +120,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             </div>
           </>
         )}
-        <footer>
-          <Typography variant="body2" className="text-center">
-            Strong Pokémon. Weak Pokémon. That is only the selfish perception of people
-          </Typography>
-        </footer>
+        {!showNoResult && !isSearchLoading && (
+          <footer>
+            <Typography variant="body2" className="text-center">
+              Strong Pokémon. Weak Pokémon. That is only the selfish perception of people.
+            </Typography>
+          </footer>
+        )}
       </main>
     </div>
   )
